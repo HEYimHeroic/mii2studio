@@ -97,10 +97,10 @@ elif input_type == "switchdb":
     orig_mii = CoreDataSwitch.from_file(input_file)
 elif input_type == "switch":
     from gen3_switchgame import CharInfoSwitch
-    orig_mii = CharInfoSwitch.from_file(sys.argv[1])
+    orig_mii = CharInfoSwitch.from_file(input_file)
 elif input_type == "miistudio":
     from gen3_studio import MiidataStudio
-    orig_mii = MiidataStudio.from_file(sys.argv[1])
+    orig_mii = MiidataStudio.from_file(input_file)
 else:
     print("Error: Invalid input type.")
     exit()
