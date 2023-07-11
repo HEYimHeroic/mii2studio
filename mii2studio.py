@@ -1,6 +1,4 @@
-import subprocess
 import sys
-import codecs
 from binascii import hexlify
 from os import remove
 from requests import get, post
@@ -16,6 +14,9 @@ else:
     input_file = sys.argv[1]
     output_file = sys.argv[2]
     input_type = sys.argv[3]
+
+if input_type == "miistudio": # for legacy reasons
+    input_type = "studio"
 
 if input_type == "wii":
     from gen1_wii import CoreDataWii
@@ -97,10 +98,10 @@ elif input_type == "switchdb":
     orig_mii = CoreDataSwitch.from_file(input_file)
 elif input_type == "switch":
     from gen3_switchgame import CharInfoSwitch
-    orig_mii = CharInfoSwitch.from_file(sys.argv[1])
-elif input_type == "miistudio":
+    orig_mii = CharInfoSwitch.from_file(input_file)
+elif input_type == "studio":
     from gen3_studio import MiidataStudio
-    orig_mii = MiidataStudio.from_file(sys.argv[1])
+    orig_mii = MiidataStudio.from_file(input_file)
 else:
     print("Error: Invalid input type.")
     exit()
@@ -294,29 +295,24 @@ with open(output_file, "wb") as f:
     mii_data = b""
     n = r = 256
     mii_dict = []
-    if input_type == "miistudio":
+    if input_type == "studio":
         with open(input_file, "rb") as g:
             read = g.read()
             g.close()
         
-        for i in range(0, len(hexlify(read)), 2):
-            mii_dict.append(int(hexlify(read)[i:i+2], 16))
+        for i in range(0, len(read), 2): # 2 characters = 1 byte in hex
+            mii_dict.append(int(read[i:i+2], 16))
     else:
         mii_dict = studio_mii.values()
-#    mii_data_bytes += hexlify(u8(0))
     mii_data += hexlify(u8(0))
     for v in mii_dict:
         eo = (7 + (v ^ n)) % 256 # encode the Mii, Nintendo seemed to have randomized the encoding using Math.random() in JS, but we removed randomizing
         n = eo
-#        mii_data_bytes += hexlify(u8(mii_dict))
         mii_data += hexlify(u8(eo))
         f.write(u8(v))
         mii_data_bytes += str(hexlify(u8(v)), "ascii")
 
     f.close()
-    
-    #codecs.decode(mii_data_bytes, "hex")
-    #mii_data_bytes = mii_data_bytes.decode("utf-8")
     
     url = "https://studio.mii.nintendo.com/miis/image.png?data=" + mii_data.decode("utf-8")
 
