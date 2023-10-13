@@ -25,7 +25,7 @@ class CoreDataWii(KaitaiStruct):
         self.favorite_color = self._io.read_bits_int_be(4)
         self.favorite = self._io.read_bits_int_be(1) != 0
         self._io.align_to_byte()
-        self.mii_name = (self._io.read_bytes(20)).decode(u"utf-16be")
+        self.mii_name = (self._io.read_bytes(20).split(b"\x00\x00",1)[0]).decode(u"utf-16be")
         self.body_height = self._io.read_u1()
         self.body_weight = self._io.read_u1()
         self.avatar_id = [None] * (4)
@@ -88,4 +88,4 @@ class CoreDataWii(KaitaiStruct):
         self.mole_horizontal = self._io.read_bits_int_be(5)
         self.unknown_12 = self._io.read_bits_int_be(1) != 0
         self._io.align_to_byte()
-        self.creator_name = (self._io.read_bytes(20)).decode(u"utf-16be")
+        self.creator_name = (self._io.read_bytes(20).split(b"\x00\x00",1)[0].decode(u"utf-16be")
