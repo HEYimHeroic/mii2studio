@@ -321,7 +321,7 @@ with open(output_file, "wb") as f:
     url = "https://studio.mii.nintendo.com/miis/image.png?data=" + mii_data.decode("utf-8")
 
     print("Mii Render URLs:\n")
-    print("Face: " + url + "&type=face&width=512&instanceCount=1")
+    print("Face: " + url + "&type=face&width=512")
     print("Body: " + url + "&type=all_body&width=512&instanceCount=1")
     print("Face (16x): " + url + "&type=face&width=512&instanceCount=16")
     print("Body (16x): " + url + "&type=all_body&width=512&instanceCount=16\n")
