@@ -5,7 +5,7 @@ seq:
   - id: facial_hair_color
     type: u1
     doc: Facial hair color. Ranges from 0 to 99. Not ordered the same as visible in editor. A map of the internal values in correlation to the Mii editor is at /maps.txt/{hair-color} for default colors and /maps.txt/{colors} for custom colors.
-  - id: beard_goatee
+  - id: facial_hair_beard
     type: u1
     doc: Beard (goatee) type. Ranges from 0 to 5.
   - id: body_weight
@@ -122,13 +122,13 @@ seq:
   - id: mouth_vertical
     type: u1
     doc: Mouth Y (vertical) position. Ranges from 18 to 0, low to high.
-  - id: beard_size
+  - id: facial_hair_size
     type: u1
     doc: Mustache size. Ranges from 0 to 8, small to large.
-  - id: beard_mustache
+  - id: facial_hair_mustache
     type: u1
     doc: Mustache type. Ranges from 0 to 5.
-  - id: beard_vertical
+  - id: facial_hair_vertical
     type: u1
     doc: Mustache Y (vertical) position. Ranges from 16 to 0, low to high.
   - id: nose_size
