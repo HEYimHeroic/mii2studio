@@ -98,7 +98,7 @@ elif input_type == "switchdb":
 elif input_type == "switch":
     from gen3_switchgame import CharInfoSwitch
     orig_mii = CharInfoSwitch.from_file(sys.argv[1])
-elif input_type == "miistudio":
+elif input_type == "studio":
     from gen3_studio import MiidataStudio
     orig_mii = MiidataStudio.from_file(sys.argv[1])
 else:
@@ -294,7 +294,7 @@ with open(output_file, "wb") as f:
     mii_data = b""
     n = r = 256
     mii_dict = []
-    if input_type == "miistudio":
+    if input_type == "studio":
         with open(input_file, "rb") as g:
             read = g.read()
             g.close()

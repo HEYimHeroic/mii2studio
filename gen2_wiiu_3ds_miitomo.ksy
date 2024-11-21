@@ -157,13 +157,13 @@ instances:
   facial_hair_beard:
     value: beard & 7
   glasses_vertical:
-    value: glasses >> 11 & 15
+    value: glasses >> 11 & 31
   glasses_size:
-    value: glasses >> 7 & 11
+    value: glasses >> 7 & 15
   glasses_color:
     value: glasses >> 4 & 7
   glasses_type:
-    value: glasses & 4
+    value: glasses & 15
   mole_vertical:
     value: mole >> 10 & 31
   mole_horizontal:
@@ -171,4 +171,4 @@ instances:
   mole_size:
     value: mole >> 1 & 15
   mole_enable:
-    value: mole >> 15
+    value: mole >> 0 & 1
